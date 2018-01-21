@@ -14,11 +14,11 @@
 int main() {
 	start:
 	displayMenu();
-
-	char *usrstr;
-	size_t numchars = 0;
-	getline(&usrstr, &numchars, stdin);
 	
+	char *usrstr = malloc(sizeof(char) * 128);
+	
+	getUsrString(&usrstr, buflimit);
+
 	char *cmd = NULL; 
 	char *arg[64] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL};	
 	getCommand(*usrstr, &cmd, arg);
@@ -28,6 +28,7 @@ int main() {
 	struct timeval start, end;	
 	struct rusage usage;
 	gettimeofday(&start, NULL);
+
 	if(child_pid ==0) {
 		execvp(cmd, arg);
 	}else if (child_pid < 0) {
@@ -43,6 +44,7 @@ int main() {
 		printf("Soft page faults: %ld\n", usage.ru_minflt);
 
 	}
+
 	goto start;
 	return 0;
 }

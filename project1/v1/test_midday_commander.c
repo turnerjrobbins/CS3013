@@ -5,4 +5,5 @@
 
 int main() {
 	assert(false && "Failing unit test");
+
 }
