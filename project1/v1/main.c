@@ -19,11 +19,12 @@ int main() {
 	char *usrstr = malloc(sizeof(char) * 128); //char * 128 might be redundant
 	
 	getUsrString(&usrstr, buflimit); //gets input (see util.h)
+	printf("\n");
 
 	// Initialize structures for storing usr command and args
 	char *cmd = NULL; 
-	char *arg[32] = { NULL };	
-	getCommand(*usrstr, &cmd, arg);
+	char *arg[32] = { NULL };
+	int rc = getCommand(*usrstr, &cmd, arg); //returns 1 if command for parent process
 
 	pid_t child_pid = fork();
 
@@ -31,20 +32,40 @@ int main() {
 	struct rusage usage;
 	gettimeofday(&start, NULL);
 
-	if(child_pid ==0) {
+	if(rc == 0 && child_pid == 0) { //execute child command
 		execvp(cmd, arg);
 	}else if (child_pid < 0) {
 		fprintf(stderr, "Whoops, something wrong with fork!");
 	}else {
-		wait(0);
-		gettimeofday(&end, NULL);
-		printf("---Statistics---\n");
-		struct rusage usage;
-		getrusage(RUSAGE_CHILDREN, &usage);
-		printf("Elapsed Time: %ld microseconds\n", end.tv_usec - start.tv_usec);
-		printf("Hard page faults: %ld\n", usage.ru_majflt);
-		printf("Soft page faults: %ld\n", usage.ru_minflt);
+		if(rc) { // execute parent command
+			switch(rc) {
+				case ADDCOMMAND:
+					printf("processing add command\n");
+					break;
+				case CHANGECOMMAND:
+					printf("processing change command\n");
+					break;
+				case PRINTCOMMAND:
+					printf("processing print command\n");
+					break;
+				case EXITCOMMAND:
+					printf("Exit called, exiting...");
+					return 0;
+				default:
+					printf("Parent command not recognized\n");
+					break;
+			}
 
+		} else {
+			wait(0);
+			gettimeofday(&end, NULL);
+			printf("---Statistics---\n");
+			struct rusage usage;
+			getrusage(RUSAGE_CHILDREN, &usage);
+			printf("Elapsed Time: %ld microseconds\n", end.tv_usec - start.tv_usec);
+			printf("Hard page faults: %ld\n", usage.ru_majflt);
+			printf("Soft page faults: %ld\n", usage.ru_minflt);
+		}
 	}
 
 	goto start; //TAKE THAT, DIJKSTRA!

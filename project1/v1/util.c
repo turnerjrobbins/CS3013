@@ -5,7 +5,8 @@
 #include "util.h"
 
 //keep track of usr commands and number of commands
-static char ***usrCommands = NULL;
+static char *usrCommands[100][32];
+static int command_count = 0;
 
 // displayMenu
 // displays the static menu elements
@@ -19,19 +20,21 @@ void displayMenu() {
 	printf("c:\tchange directory:\tChanges process working directory\n");
 	printf("e:\texit:\tLeave Mid-Day Commander\n");
 	printf("p:\tpwd:\tPrints working directory\n");
-	printf("Option:");
 	printUsrCommands();
+	printf("Option:");
 }
 
 // printUsrCommands
 // prints the user commands stored in usrCommands
 //
 void printUsrCommands() {
+	printf("\nstart print usr commands\n");
 	for(int i = 0; i < command_count; i++) {
 		printf("%d:\t%s:", 4+i, usrCommands[i][0]);
 		int j = 1;
-		while (usrCommands[j] != NULL) {
+		while (usrCommands[i][j] != NULL) {
 			printf("%s",usrCommands[i][j]);
+			j++;
 		}
 		printf("\n");
 	}
@@ -42,16 +45,15 @@ void printUsrCommands() {
 //
 void getUsrString(char **buf, int buflimit) {
 	//getline(&usrstr, &numchars, stdin);
-	char * newBuf = malloc(128);
+	char *newBuf = malloc(buflimit);
 	fgets(newBuf, buflimit, stdin);
-	newBuf = strtok(newBuf, "\n");
-	*buf = strndup(newBuf, 128);
+	*buf = strndup(newBuf, 127);
 }
 
 //
 //
-//
-void getCommand(char usrchar, char **file, char **arg) {
+//return value: 0 for child process, 1 for parent process
+enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
 	//
 	if(usrchar == '0') {
 		printf("----whoami----\n");
@@ -77,31 +79,54 @@ void getCommand(char usrchar, char **file, char **arg) {
 		arg[3] = NULL;
 
 	} else if (usrchar == 'a') {
-		printf("----Add Command----");
+		printf("----Add Command----\n");
 		char *newline = NULL;
 		getUsrString(&newline, buflimit);
 
+		char UnambiguouslyModifiableString[buflimit];
+		strcpy(UnambiguouslyModifiableString, newline); 
+
 		char *str = NULL;
 		//parse newline for command, then arguments
-		str = strtok(newline, " ");
-		int argCount = 0;
-		while(str != NULL) {
-			printf("%s\n",str);
-			arg[argCount] = str;
-
-			argCount ++;
-			str = strtok(NULL, " ");
+		const char *delim = " ";
+		int count = 0;
+		arg[count] = strtok(UnambiguouslyModifiableString, delim);
+		while(arg[count] != NULL) {
+			count ++;
+			arg[count] = strtok(NULL, delim);
 		}
-		//append final NULL
-		arg[argCount + 1] = NULL;
+
+		printf("copying\n");
+		//copy this into our known user commands
+		int i = 0;
+		while(arg[i] != NULL){
+			char *buf = malloc(buflimit);
+			strcpy(buf, arg[i]);
+			usrCommands[command_count][i] = buf;
+			free(buf);
+			printf("Copying: %s\n", usrCommands[command_count][i]);
+			i++;
+		}
+		printf("appending null\n");
+		usrCommands[command_count][i] = NULL;
+		command_count ++;
+		return ADDCOMMAND;
 
 	} else if (usrchar == 'c') {
-	
+		printf("----Change Directory----\n");
+		printf("Path? (Quotes/spaces not supported)");
+		char * newline = NULL;
+		getUsrString(&newline, buflimit);
+		return CHANGECOMMAND;
 	} else if (usrchar == 'e') {
 
+		return EXITCOMMAND;
 	} else if (usrchar = 'p') { 
 
+		return PRINTCOMMAND;
 	} else {
 		printf("You picked incorrectly");
+		return ERRORCOMMAND;
 	}
+	return CHILDCOMMAND;
 }
