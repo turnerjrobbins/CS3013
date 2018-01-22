@@ -12,15 +12,17 @@
 //
 //
 int main() {
-	start:
+	start: //I suppose I could use a while loop, but this is more fun
+	//because it makes Dijkstra toss in his grave (is he dead?).
 	displayMenu();
 	
-	char *usrstr = malloc(sizeof(char) * 128);
+	char *usrstr = malloc(sizeof(char) * 128); //char * 128 might be redundant
 	
-	getUsrString(&usrstr, buflimit);
+	getUsrString(&usrstr, buflimit); //gets input (see util.h)
 
+	// Initialize structures for storing usr command and args
 	char *cmd = NULL; 
-	char *arg[64] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL};	
+	char *arg[32] = { NULL };	
 	getCommand(*usrstr, &cmd, arg);
 
 	pid_t child_pid = fork();
@@ -45,8 +47,8 @@ int main() {
 
 	}
 
-	goto start;
-	return 0;
+	goto start; //TAKE THAT, DIJKSTRA!
+	return 0; //appendage, pls remove
 }
 
 
