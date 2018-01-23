@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#include <errno.h>
 
 #include "util.h"
 
@@ -26,7 +27,10 @@ int main() {
 	char *arg[32] = { NULL };
 	int rc = getCommand(*usrstr, &cmd, arg); //returns 1 if command for parent process
 
-	pid_t child_pid = fork();
+	pid_t child_pid;
+	if(rc == 0) {  
+		child_pid = fork();
+	}
 
 	struct timeval start, end;	
 	struct rusage usage;
@@ -43,14 +47,25 @@ int main() {
 					printf("processing add command\n");
 					break;
 				case CHANGECOMMAND:
-					printf("processing change command\n");
+					printf("processing change command: %d %s\n", getpid(), arg[0]);
+					arg[0][strlen(arg[0]) - 1] = '\0';
+					const char* cdBuf = arg[0];
+					int rc = chdir(cdBuf);
+					if(!rc==0) {
+						printf("DIRECTORY CHANGE FAILED, CHECK YOUR PATH: %s\n", strerror(errno));
+					}
 					break;
 				case PRINTCOMMAND:
-					printf("processing print command\n");
+					printf("processing print command %d\n", getpid());
+					char *buf = malloc(buflimit);
+					getcwd(buf, buflimit);
+					printf("Current Working Directory: %s", buf);
+					free(buf);
 					break;
 				case EXITCOMMAND:
 					printf("Exit called, exiting...");
 					return 0;
+					break;
 				default:
 					printf("Parent command not recognized\n");
 					break;

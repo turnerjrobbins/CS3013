@@ -27,3 +27,4 @@ chdir
 strtok
 getcwd
 
+Now that I have the string-parsing working correctly (ish), I should figure out how to store it in the userCommands array
