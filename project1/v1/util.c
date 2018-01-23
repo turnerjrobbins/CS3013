@@ -28,13 +28,13 @@ void displayMenu() {
 // prints the user commands stored in usrCommands
 //
 void printUsrCommands() {
-	printf("\nstart print usr commands\n");
-	for(int i = 0; i < command_count; i++) {
-		printf("%d:\t%s:", 4+i, usrCommands[i][0]);
-		int j = 1;
-		while (usrCommands[i][j] != NULL) {
-			printf("%s",usrCommands[i][j]);
-			j++;
+	printf("\n----User Commands----\n");
+	for(int command = 0; command < command_count; command++) {
+		printf("%d:\t%s:\t", command + 4, usrCommands[command][0]);
+		int arg = 1;
+		while (usrCommands[command][arg] != NULL) {
+			printf("%s ",usrCommands[command][arg]);
+			arg++;
 		}
 		printf("\n");
 	}
@@ -98,12 +98,12 @@ enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
 
 		printf("copying\n");
 		//copy this into our known user commands
+		char * buf;
 		int i = 0;
 		while(arg[i] != NULL){
-			char *buf = malloc(buflimit);
+			buf = malloc(buflimit);
 			strcpy(buf, arg[i]);
 			usrCommands[command_count][i] = buf;
-			free(buf);
 			printf("Copying: %s\n", usrCommands[command_count][i]);
 			i++;
 		}
@@ -117,6 +117,7 @@ enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
 		printf("Path? (Quotes/spaces not supported)");
 		char * newline = NULL;
 		getUsrString(&newline, buflimit);
+		arg[0] = newline;
 		return CHANGECOMMAND;
 	} else if (usrchar == 'e') {
 
