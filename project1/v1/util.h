@@ -21,6 +21,8 @@ void displayMenu();
 
 void printUsrCommands();
 
+void replaceNewline(char **buf, int buflimit, const char replaceChar);
+
 void getUsrString(char **buf, int buflimit);
 
 enum CommandID getCommand(char usrchar, char **file, char *arg[]);

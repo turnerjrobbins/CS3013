@@ -28,3 +28,11 @@ strtok
 getcwd
 
 Now that I have the string-parsing working correctly (ish), I should figure out how to store it in the userCommands array
+
+MUST PRINT AN ERROR IF INPUT CONTAINS MORE THAN 128 CHARACTERS OR MORE THAN 32 DISTINCT ARGUMENTS
+
+Note that the Linux man pages explicitly state that getrusage() returns the cumulative statistics for
+all children of a process, not just the statistics for the most recent child. Therefore, you must keep a record
+of the statistics of previous children. When you call getrusage() after a particular child has terminated,
+you must subtract the previous statistics from the most recent ones returned by getrusage() in order to
+find out how many resources that the particular child used.
