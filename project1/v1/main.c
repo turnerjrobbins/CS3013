@@ -24,6 +24,11 @@ int main() {
 	
 	getUsrString(&usrstr, buflimit); //gets input (see util.h)
 	printf("\n");
+	replaceNewline(&usrstr, buflimit, '\0');
+	if(strlen(usrstr) > 1) {
+		printf("\nPlease input only 1 character\n");
+		goto start;
+	}
 
 	// Initialize structures for storing usr command and args
 	char *cmd = NULL; 

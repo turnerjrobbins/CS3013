@@ -1,0 +1,363 @@
+turner
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+Option:
+----Add Command----
+appending null
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+3:	sleep:	5 
+Option:
+----Add Command----
+appending null
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+3:	sleep:	5 
+4:	sleep:	1 	(background)
+Option:Running sleep :: 1
+No processes finished
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+3:	sleep:	5 
+4:	sleep:	1 	(background)
+Option:Running sleep :: 1
+No processes finished
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+3:	sleep:	5 
+4:	sleep:	1 	(background)
+Option:Running sleep :: 1
+No processes finished
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+3:	sleep:	5 
+4:	sleep:	1 	(background)
+Option:----whoami----
+Running whoami :: 0
+
+whoami has finished
+---Statistics---
+Elapsed Time: 1 
+Hard page faults: 0
+Soft page faults: 110
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+3:	sleep:	5 
+4:	sleep:	1 	(background)
+Option:Running sleep :: 1
+No processes finished
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----Uturner   pts/3        :0.0             Wed Jan 24 15:56   still logged in
+turner   pts/2        :0.0             Wed Jan 24 15:56   still logged in
+turner   pts/1        :0               Wed Jan 24 15:54   still logged in
+turner   pts/0        :0               Wed Jan 24 15:54 - 16:21  (00:27)
+turner   tty1                          Tue Jan 23 23:58   still logged in
+reboot   system boot  4.13.0-26-generi Tue Jan 23 18:53   still running
+turner   pts/3        :0.0             Tue Jan 23 16:20 - 22:04  (05:43)
+turner   pts/2        :0.0             Tue Jan 23 16:20 - 22:04  (05:43)
+turner   pts/1        :0               Tue Jan 23 15:44 - 22:04  (06:19)
+turner   pts/0        :0               Tue Jan 23 15:44 - 21:31  (05:46)
+turner   pts/2        :0.0             Mon Jan 22 18:11 - 19:58  (01:46)
+turner   pts/2        :0.0             Mon Jan 22 17:51 - 18:10  (00:19)
+turner   pts/1        :0.0             Mon Jan 22 17:24 - 19:58  (02:33)
+turner   pts/3        :0.0             Mon Jan 22 13:45 - 16:14  (02:29)
+turner   pts/2        :0.0             Mon Jan 22 12:30 - 17:16  (04:45)
+turner   pts/1        :0.0             Mon Jan 22 12:16 - 17:16  (04:59)
+turner   pts/0        :0.0             Mon Jan 22 11:59 - 19:58  (07:59)
+turner   tty1                          Mon Jan 22 11:58 - down  (1+10:05)
+reboot   system boot  4.13.0-26-generi Mon Jan 22 06:55 - 22:04 (1+15:08)
+turner   pts/1        :0.0             Sun Jan 21 16:04 - 18:02  (01:57)
+turner   pts/0        :0.0             Sun Jan 21 15:38 - 18:02  (02:23)
+turner   tty1                          Sun Jan 21 15:37 - crash  (15:17)
+reboot   system boot  4.13.0-26-generi Sun Jan 21 10:36 - 22:04 (2+11:27)
+turner   tty1                          Sat Jan 20 16:10 - down   (23:25)
+reboot   system boot  4.13.0-26-generi Sat Jan 20 11:08 - 15:36 (1+04:27)
+turner   tty1                          Sat Jan 20 11:44 - down   (00:00)
+reboot   system boot  4.13.0-26-generi Sat Jan 20 06:44 - 11:44  (05:00)
+turner   tty1                          Sat Jan 20 01:59 - crash  (04:44)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 20:59 - 11:44  (14:45)
+turner   pts/2        :0.0             Fri Jan 19 18:38 - 19:19  (00:41)
+turner   pts/1        :0.0             Fri Jan 19 18:08 - 19:19  (01:11)
+turner   pts/2        :0.0             Fri Jan 19 17:34 - 17:37  (00:03)
+turner   pts/1        :0.0             Fri Jan 19 17:34 - 17:37  (00:03)
+turner   pts/1        :0.0             Fri Jan 19 17:33 - 17:33  (00:00)
+turner   pts/0        :0.0             Fri Jan 19 17:33 - 19:19  (01:46)
+turner   pts/1        :0.0             Fri Jan 19 17:03 - 17:32  (00:29)
+turner   pts/0        :0.0             Fri Jan 19 17:01 - 17:32  (00:31)
+turner   pts/3        :0               Fri Jan 19 17:00 - 17:22  (00:21)
+turner   pts/2        :0               Fri Jan 19 17:00 - 17:01  (00:00)
+turner   pts/1        :0               Fri Jan 19 17:00 - 17:00  (00:00)
+turner   pts/0        :0               Fri Jan 19 17:00 - 17:01  (00:00)
+turner   tty1                          Fri Jan 19 17:00 - down   (02:19)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 12:00 - 19:19  (07:19)
+turner   pts/3        :0               Fri Jan 19 16:46 - 17:00  (00:14)
+turner   pts/2        :0               Fri Jan 19 16:46 - 17:00  (00:14)
+turner   pts/1        :0               Fri Jan 19 16:46 - 17:00  (00:14)
+turner   pts/0        :0               Fri Jan 19 16:46 - 16:46  (00:00)
+turner   tty1                          Fri Jan 19 16:45 - down   (00:14)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 11:45 - 17:00  (05:14)
+turner   tty1                          Fri Jan 19 16:41 - down   (00:03)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 11:41 - 16:45  (05:04)
+turner   tty1                          Fri Jan 19 16:37 - crash  (-4:-56)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 11:37 - 16:45  (05:07)
+turner   pts/3        :0               Fri Jan 19 16:34 - 16:36  (00:01)
+turner   pts/2        :0               Fri Jan 19 16:34 - 16:36  (00:01)
+turner   pts/1        :0               Fri Jan 19 16:34 - 16:36  (00:01)
+turner   pts/0        :0               Fri Jan 19 16:34 - 16:36  (00:01)
+turner   pts/3        :0.0             Fri Jan 19 16:33 - 16:34  (00:00)
+turner   pts/2        :0               Fri Jan 19 16:33 - 16:34  (00:01)
+turner   pts/1        :0               Fri Jan 19 16:33 - 16:34  (00:01)
+turner   pts/0        :0               Fri Jan 19 16:33 - 16:34  (00:01)
+turner   tty1                          Fri Jan 19 16:33 - crash  (-4:-55)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 11:33 - 16:45  (05:12)
+turner   pts/2        :0               Fri Jan 19 16:20 - 16:32  (00:12)
+turner   pts/1        :0               Fri Jan 19 16:20 - 16:32  (00:12)
+turner   pts/0        :0               Fri Jan 19 16:20 - 16:32  (00:12)
+turner   tty1                          Fri Jan 19 16:20 - down   (00:12)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 11:20 - 16:32  (05:12)
+turner   pts/2        :0               Fri Jan 19 16:06 - 16:19  (00:13)
+turner   pts/1        :0               Fri Jan 19 16:06 - 16:19  (00:13)
+turner   pts/0        :0               Fri Jan 19 16:06 - 16:19  (00:13)
+turner   tty1                          Fri Jan 19 15:57 - down   (00:22)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 10:57 - 16:19  (05:22)
+turner   pts/2        :0.0             Fri Jan 19 15:42 - 15:46  (00:04)
+turner   pts/1        :0               Fri Jan 19 15:41 - 15:46  (00:05)
+turner   pts/0        :0               Fri Jan 19 15:41 - 15:46  (00:05)
+turner   pts/1        :0.0             Fri Jan 19 15:37 - 15:39  (00:01)
+turner   pts/0        :0               Fri Jan 19 15:16 - 15:39  (00:23)
+turner   tty1                          Fri Jan 19 15:16 - down   (00:41)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 10:15 - 15:57  (05:41)
+turner   pts/0        :0.0             Fri Jan 19 15:12 - 15:15  (00:03)
+turner   tty1                          Fri Jan 19 15:10 - down   (00:04)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 10:10 - 15:15  (05:05)
+root     pts/0        :0               Fri Jan 19 15:06 - 15:09  (00:03)
+turner   tty1                          Fri Jan 19 15:06 - crash  (-4:-55)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 10:05 - 15:15  (05:09)
+root     pts/0        :0               Fri Jan 19 15:04 - 15:05  (00:01)
+turner   tty1                          Fri Jan 19 15:04 - crash  (-4:-58)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 10:04 - 15:15  (05:11)
+turner   tty7         :0               Fri Jan 19 15:02 - down   (00:01)
+turner   pts/0        :0               Fri Jan 19 15:01 - 15:02  (00:00)
+turner   pts/0        :0               Fri Jan 19 14:59 - 15:01  (00:02)
+turner   tty1                          Fri Jan 19 14:59 - down   (00:04)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 09:58 - 15:03  (05:04)
+turner   pts/2        :0.0             Fri Jan 19 14:58 - 14:58  (00:00)
+turner   pts/2        :0.0             Fri Jan 19 14:57 - 14:57  (00:00)
+turner   pts/1        :0.0             Fri Jan 19 14:51 - 14:58  (00:07)
+turner   pts/0        :0               Fri Jan 19 14:44 - 14:57  (00:13)
+turner   tty1                          Fri Jan 19 14:43 - crash  (-4:-45)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 09:43 - 15:03  (05:20)
+turner   pts/1        :0.0             Fri Jan 19 14:39 - 14:43  (00:03)
+turner   pts/0        :0               Fri Jan 19 14:38 - 14:43  (00:04)
+turner   tty1                          Fri Jan 19 14:38 - crash  (-4:-55)
+reboot   system boot  4.13.0-26-generi Fri Jan 19 09:38 - 15:03  (05:25)
+turner   pts/4        :0               Fri Jan 19 14:37 - 14:37  (00:00)
+turner   pts/3        :0               Fri Jan 19 14:37 - 14:37  (00:00)
+turner   pts/2        :0               Fri Jan 19 14:37 - 14:37  (00:00)
+turner   pts/1        :0               Fri Jan 19 14:37 - 14:37  (00:00)
+turner   pts/0        :0               Fri Jan 19 14:37 - 14:37  (00:00)
+turner   pts/4        :0.0             Fri Jan 19 14:28 - 14:36  (00:08)
+turner   pts/3        :0.0             Fri Jan 19 14:24 - 14:36  (00:11)
+turner   pts/2        :0.0             Fri Jan 19 14:23 - 14:36  (00:13)
+turner   pts/1        :0.0             Fri Jan 19 14:19 - 14:36  (00:17)
+turner   pts/0        :0.0             Fri Jan 19 14:16 - 14:36  (00:20)
+turner   tty1                          Thu Jan 18 20:13 - crash  (13:24)
+reboot   system boot  4.13.0-26-generi Thu Jan 18 15:13 - 15:03  (23:50)
+turner   tty1                          Thu Jan 18 16:44 - down   (02:53)
+reboot   system boot  4.13.0-26-generi Thu Jan 18 11:44 - 19:38  (07:53)
+turner   pts/0        :0.0             Thu Jan 18 11:50 - 14:22  (02:31)
+turner   pts/0        :0.0             Wed Jan 17 16:14 - 16:17  (00:03)
+turner   pts/2        :0               Wed Jan 17 16:13 - 16:13  (00:00)
+turner   pts/1        :0               Wed Jan 17 16:13 - 16:13  (00:00)
+turner   pts/0        :0               Wed Jan 17 16:13 - 16:13  (00:00)
+turner   tty1                          Wed Jan 17 16:13 - down   (23:51)
+reboot   system boot  4.13.0-26-generi Wed Jan 17 16:13 - 16:04  (23:51)
+turner   pts/2        :0               Wed Jan 17 15:54 - 15:57  (00:02)
+turner   pts/0        :0               Wed Jan 17 15:54 - 15:55  (00:01)
+turner   pts/1        :0               Wed Jan 17 15:54 - 15:55  (00:01)
+turner   tty1                          Wed Jan 17 15:54 - down   (00:03)
+reboot   system boot  4.13.0-26-generi Wed Jan 17 15:53 - 15:57  (00:03)
+turner   tty1                          Wed Jan 17 11:50 - crash  (04:03)
+reboot   system boot  4.13.0-26-generi Wed Jan 17 06:38 - 15:57  (09:18)
+turner   tty1                          Wed Jan 17 03:31 - down   (05:14)
+reboot   system boot  4.13.0-26-generi Wed Jan 17 03:22 - 08:46  (05:24)
+reboot   system boot  4.13.0-26-generi Wed Jan 17 01:25 - 01:25  (00:00)
+turner   tty1                          Wed Jan 17 01:24 - down   (00:00)
+reboot   system boot  4.13.0-26-generi Wed Jan 17 01:24 - 01:24  (00:00)
+turner   pts/4        :0.0             Tue Jan 16 22:54 - 23:31  (00:37)
+turner   pts/3        :0.0             Tue Jan 16 22:50 - 23:31  (00:40)
+turner   pts/2        :0.0             Tue Jan 16 21:44 - 23:31  (01:47)
+turner   pts/2        :0.0             Tue Jan 16 21:44 - 21:44  (00:00)
+turner   pts/2        :0.0             Tue Jan 16 21:43 - 21:43  (00:00)
+turner   pts/2        :0               Tue Jan 16 21:03 - 21:03  (00:00)
+turner   pts/1        :0.0             Tue Jan 16 21:02 - 21:02  (00:00)
+turner   tty1                          Tue Jan 16 20:59 - down   (04:24)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 20:59 - 01:24  (04:24)
+turner   tty1                          Tue Jan 16 20:05 - crash  (00:54)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 20:04 - 01:24  (05:19)
+turner   tty1                          Tue Jan 16 20:03 - crash  (00:01)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 20:03 - 01:24  (05:21)
+turner   tty1                          Tue Jan 16 19:57 - crash  (00:05)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 19:57 - 01:24  (05:27)
+turner   tty7         :0               Tue Jan 16 19:54 - 19:56  (00:01)
+turner   tty1                          Tue Jan 16 19:52 - crash  (00:04)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 19:52 - 01:24  (05:31)
+turner   tty7         :0               Tue Jan 16 19:51 - down   (00:01)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 19:50 - 19:52  (00:01)
+turner   tty7         :0               Tue Jan 16 19:49 - crash  (00:00)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 19:49 - 19:52  (00:02)
+turner   tty7         :0               Tue Jan 16 19:43 - down   (00:05)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 19:43 - 19:49  (00:06)
+turner   tty7         :0               Tue Jan 16 19:39 - crash  (00:03)
+reboot   system boot  4.13.0-26-generi Tue Jan 16 19:38 - 19:49  (00:10)
+
+wtmp begins Tue Jan 16 19:38:50 2018
+ser Commands----
+3:	sleep:	5 
+4:	sleep:	1 	(background)
+Option:
+----last logins----
+Running last :: 0
+
+last has finished
+---Statistics---
+Elapsed Time: 1 
+Hard page faults: 0
+Soft page faults: 137
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+3:	sleep:	5 
+4:	sleep:	1 	(background)
+Option:
+----Add Command----
+appending null
+processing add command
+
+
+-----Mid-Day Commander v0-----
+Good day, Commander! What command would you like to run?
+0:	whoami:	prints out username
+1:	last:	prints out last command
+2:	ls:	lists directory contents
+a:	add command:	Adds a new command to the menu.
+c:	change directory:	Changes process working directory
+e:	exit:	Leave Mid-Day Commander
+p:	pwd:	Prints working directory
+r:	running processes:	Prints running background processes
+
+----User Commands----
+3:	sleep:	5 
+4:	sleep:	1 	(background)
+5:	echo:	test test test test test 	(background)
+Option:
+----Add Command----
+
+ERROR: You may have tried to enter more than 32 arguments. As a result the program is exiting.

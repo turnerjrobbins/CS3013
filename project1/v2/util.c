@@ -4,12 +4,17 @@
 #include <ctype.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <sys/time.h>
+#include <sys/resource.h>
 
 #include "util.h"
 
 //keep track of usr commands and number of commands
 static char *usrCommands[100][33];
+static int bgCommands[100] = {0};
 static int command_count = 0;
+static int *runningProcesses;
+static int numRunningProcesses = 0;
 
 // displayMenu
 // displays the static menu elements
@@ -23,6 +28,7 @@ void displayMenu() {
 	printf("c:\tchange directory:\tChanges process working directory\n");
 	printf("e:\texit:\tLeave Mid-Day Commander\n");
 	printf("p:\tpwd:\tPrints working directory\n");
+	printf("r:\trunning processes:\tPrints running background processes\n");
 	printUsrCommands();
 	printf("Option:");
 }
@@ -38,6 +44,9 @@ void printUsrCommands() {
 		while (usrCommands[command][arg] != NULL) {
 			printf("%s ",usrCommands[command][arg]);
 			arg++;
+		}
+		if(bgCommands[command]){
+			printf("\t(background)");
 		}
 		printf("\n");
 	}
@@ -92,11 +101,51 @@ int containsAmpersand(char **arg) {
 	return 0;
 }
 
+int markAsBackground(char **arg, int commandNum) {
+	int rc = 0;
+	int i = 0;
+	while(arg[i] != NULL) {
+		int len = strlen(arg[i]);
+		if(arg[i][len-1] == '&') {
+			arg[i][len-1] = '\0';
+			bgCommands[commandNum] = 1;
+		}
+		i++;
+	}
+	return 0;
+}
+
+//check if arg matches any known commands, then checks if it's a background command
+int isBackgroundCommand(char *arg[]) {
+	int i =0;
+	while(i < command_count) {
+		int strIndex = 0;
+		int matches = 1;
+		while(usrCommands[i][strIndex] != NULL && arg[strIndex] != NULL) {
+			if(!strcmp(usrCommands[i][strIndex], arg[strIndex])) {
+				//matches
+			}else {
+				matches = 0; //Doesn't match, go to next string
+			}
+			strIndex++;
+		}
+		if(matches) {
+			if(bgCommands[i] == 1) {
+				return 1;
+			}else {
+				return 0;
+			}
+		}
+		i++;
+	} //Didn't find match
+	return 0; //Didn't even see the command
+}
+
 //getCommand
 //takes the usercharacter and then performs all the requisite processing to
 //get the arguments. Also does the heavy lifting for storing commands in usrCommands
 //return value: 0 for child process, see enum for parent process
-enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
+commandID getCommand(char usrchar, char **file, char *arg[]) {
 	//
 	if(isdigit(usrchar)) {
 		int usrDigit = usrchar - '0';
@@ -122,7 +171,7 @@ enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
 		arg[0] = "whoami";
 		arg[1] = NULL;
 	} else if (usrchar == '1') {
-		printf("----last----\n");
+		printf("\n----last logins----\n");
 		*file = "last";
 		arg[0] = "last";
 		arg[1] = NULL;
@@ -141,7 +190,7 @@ enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
 		arg[3] = NULL;
 
 	} else if (usrchar == 'a') {
-		printf("----Add Command----\n");
+		printf("\n----Add Command----\n");
 		char *newline = NULL;
 		getUsrString(&newline, buflimit);
 		replaceNewline(&newline, buflimit, ' ');
@@ -164,15 +213,24 @@ enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
 			exit(0);
 		}
 
-		printf("copying\n");
+		if(containsAmpersand(arg)) {
+			markAsBackground(arg, command_count);
+		}
+
+		//printf("copying\n");
 		//copy this into our known user commands
 		char * buf;
 		int i = 0;
 		while(arg[i] != NULL){
 			buf = malloc(buflimit);
+			if(arg[i][0] == '\0') {
+				arg[i] = NULL;
+				usrCommands[command_count][i] = NULL;
+				break;
+			}
 			strcpy(buf, arg[i]);
 			usrCommands[command_count][i] = buf;
-			printf("Copying: %s\n", usrCommands[command_count][i]);
+			//printf("Copying: %s\n", usrCommands[command_count][i]);
 			i++;
 		}
 		
@@ -189,14 +247,135 @@ enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
 		arg[0] = newline;
 		return CHANGECOMMAND;
 	} else if (usrchar == 'e') {
-
 		return EXITCOMMAND;
-	} else if (usrchar = 'p') { 
-
+	} else if (usrchar == 'p') { 
 		return PRINTCOMMAND;
+	} else if(usrchar == 'r') {
+		return RUNNINGCOMMAND;
 	} else {
 		printf("You picked incorrectly");
 		return ERRORCOMMAND;
 	}
 	return CHILDCOMMAND;
+}
+
+int addProcess(pid_t pid) {
+	int newsize;
+	if(runningProcesses == NULL) {
+		runningProcesses = malloc(sizeof(pid_t) * 1000);
+	}
+	/*else {
+		newsize = sizeof(runningProcesses) + sizeof(pid_t);
+	}
+	int *newArray = runningProcesses;
+	runningProcesses = calloc(numRunningProcesses + 1, sizeof(int));
+	for(int i=0; i < numRunningProcesses; i++) {
+		runningProcesses[i] = newArray[i];
+	}
+	runningProcesses[numRunningProcesses + 1] = pid;
+	numRunningProcesses++;
+	//free(newArray);
+	//runningProcesses = newArray;
+	//runningProcesses = realloc(runningProcesses, newsize);
+	//runningProcesses[numRunningProcesses] = pid;
+	*/
+	runningProcesses[numRunningProcesses] = pid;
+	numRunningProcesses++;
+	return 0;
+}
+
+int removeProcess(int pid) {
+	if(numRunningProcesses == 0) {
+		printf("\nERROR: NO RUNNING PROCESSES TO REMOVE\n");
+	}
+	if(isRunningProcess(pid)) {
+		numRunningProcesses = numRunningProcesses - 1;
+	}
+	return 0;
+	/*
+	if(runningProcesses == NULL) {
+		printf("ERROR: ATTEMPTED TO REMOVE PROCESS FROM EMPTY ARRAY\n");
+		return -1;
+	}
+	//int *newArray = malloc(sizeof(runningProcesses) - sizeof(int));
+	int *newArray = calloc(numRunningProcesses - 1, sizeof(pid_t));
+	int removedIndexMod = 0;
+	for(int i = 0; i < numRunningProcesses; i++) {
+		if(runningProcesses[i] == pid) {
+			removedIndexMod++;
+		}
+		else{
+			newArray[i-removedIndexMod] = runningProcesses[i]; 
+		}
+	}
+	//free(runningProcesses);
+	runningProcesses = newArray;
+	*/
+}
+
+int removeAllProcesses(int *list, int num) {
+	int newList[numRunningProcesses-num];
+	for(int i =0; i < numRunningProcesses; i++) {
+		int add = 1;
+		for(int j = 0; j < num ; j++) {
+			if (runningProcesses[i] == list[j]) {
+				add=0;
+				printf("Process %d removed\n", list[j]);
+				break;
+			}
+		}
+		if(add) {
+				newList[i] = runningProcesses[i];
+		}
+	}
+	//overwrite old list with newlist
+	int i = 0;
+	while(i < numRunningProcesses-num) {
+		runningProcesses[i] = newList[i];
+		i++;
+	}
+	while(i < 1000) {
+		runningProcesses[i] = 0;
+		i++;
+	}
+	return 0;
+}
+
+int numBackgroundProcesses() {
+	return numRunningProcesses;
+}
+
+int *getProcessList() {
+	return runningProcesses;
+}
+
+int isRunningProcess(int pid) {
+	if(runningProcesses == NULL) {
+		return 0;
+	}
+	for(int i = 0; i < numRunningProcesses; i++) {
+		if(runningProcesses[i] == pid) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void printUsageStats(int pid, struct timeval *pidStart) {
+	static struct rusage usage;
+	static long cuMajflt = 0, cuMinflt =0;
+	struct timeval end;
+	gettimeofday(&end, NULL);
+	getrusage(RUSAGE_CHILDREN, &usage);
+
+	//Display Stats
+	printf("---Statistics---\n");
+	long elapsedTime = (end.tv_sec-pidStart->tv_sec) * 1000 + (end.tv_usec-pidStart->tv_usec)/1000;
+	printf("Elapsed Time: %ld \n", elapsedTime);
+	printf("Hard page faults: %ld\n", usage.ru_majflt - cuMajflt); //only print difference in accumulated stats
+	printf("Soft page faults: %ld\n", usage.ru_minflt - cuMinflt);
+
+	//Store Stats
+	cuMajflt += usage.ru_majflt - cuMajflt; //add the new difference
+	cuMinflt += usage.ru_minflt - cuMinflt;
 }
