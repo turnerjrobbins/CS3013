@@ -1,0 +1,5 @@
+- make error if input is greater than 1 character 			-DONE
+- no exit if background tasks are left						-DONE
+- wait3 WNHOHANG if background process until no returns		-DONE
+- wait3 normal if non background processes 					-DONE
+- r command prints background processes 					-

@@ -13,6 +13,9 @@
 //
 //
 int main() {
+	//variables for storing cumulative rusage
+	long cuMajflt = 0, cuMinflt =0;
+	struct rusage usage;
 	start: //I suppose I could use a while loop, but this is more fun
 	//because it makes Dijkstra toss in his grave (is he dead?).
 	displayMenu();
@@ -21,10 +24,15 @@ int main() {
 	
 	getUsrString(&usrstr, buflimit); //gets input (see util.h)
 	printf("\n");
+	replaceNewline(&usrstr, buflimit, '\0');
+	if(strlen(usrstr) > 1) {
+		printf("\nPlease input only 1 character\n");
+		goto start;
+	}
 
 	// Initialize structures for storing usr command and args
 	char *cmd = NULL; 
-	char *arg[32] = { NULL };
+	char *arg[33] = { NULL };
 	int rc = getCommand(*usrstr, &cmd, arg); //returns 1 if command for parent process
 
 	pid_t child_pid;
@@ -33,7 +41,6 @@ int main() {
 	}
 
 	struct timeval start, end;	
-	struct rusage usage;
 	gettimeofday(&start, NULL);
 
 	if(rc == 0 && child_pid == 0) { //execute child command
@@ -72,14 +79,23 @@ int main() {
 			}
 
 		} else {
-			wait(0);
-			gettimeofday(&end, NULL);
-			printf("---Statistics---\n");
-			struct rusage usage;
-			getrusage(RUSAGE_CHILDREN, &usage);
-			printf("Elapsed Time: %ld microseconds\n", end.tv_usec - start.tv_usec);
-			printf("Hard page faults: %ld\n", usage.ru_majflt);
-			printf("Soft page faults: %ld\n", usage.ru_minflt);
+			//gather stats
+			int child_rc = waitpid(-1, NULL, 0); //wait for any child
+			if(child_rc != 0) {	
+				gettimeofday(&end, NULL);
+				getrusage(RUSAGE_CHILDREN, &usage);
+
+				//Display Stats
+				printf("---Statistics---\n");
+				printf("Elapsed Time: %ld microseconds\n", end.tv_usec - start.tv_usec);
+				printf("Hard page faults: %ld\n", usage.ru_majflt - cuMajflt);
+				printf("Soft page faults: %ld\n", usage.ru_minflt - cuMinflt);
+			
+				//Store Stats
+				cuMajflt += usage.ru_majflt - cuMajflt;
+				cuMinflt += usage.ru_minflt - cuMinflt;
+			}
+			
 		}
 	}
 

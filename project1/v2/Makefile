@@ -1,11 +1,11 @@
 #Turner Robbins
-all: mc1
+all: mc2 tests
 
-mc1: main.c util.h util.c
-	gcc -o mc1 main.c util.c
+mc2: main.c util.h util.c
+	gcc -o mc2 main.c util.c
 
 tests: test_midday_commander.c util.h util.c
 	gcc -g -o tests test_midday_commander.c util.c
 
 clean:
-	rm -f mc1 tests main.o
+	rm -f mc2 tests main.o
