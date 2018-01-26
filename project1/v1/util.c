@@ -191,7 +191,7 @@ enum CommandID getCommand(char usrchar, char **file, char *arg[]) {
 	} else if (usrchar == 'e') {
 
 		return EXITCOMMAND;
-	} else if (usrchar = 'p') { 
+	} else if (usrchar == 'p') { 
 
 		return PRINTCOMMAND;
 	} else {
